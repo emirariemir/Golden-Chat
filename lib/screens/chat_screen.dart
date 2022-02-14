@@ -13,6 +13,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Chat'),
+        elevation: 0.0,
         backgroundColor: Colors.black,
         automaticallyImplyLeading: false,
         actions: [
