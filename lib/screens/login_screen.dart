@@ -20,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       backgroundColor: Colors.white,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
               title: 'Login',
               color: kBlueColor,
               onTap: () {
-                print('somethn');
+                Navigator.pushNamed(context, 'chat-screen');
               },
             ),
           ],

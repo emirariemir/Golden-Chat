@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "22825096518",
+    "project_id": "au-chat-9bee8",
+    "storage_bucket": "au-chat-9bee8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22825096518:android:2e5abf841a0ec9d26e0147",
+        "android_client_info": {
+          "package_name": "com.ariomatic.AuChat.au_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22825096518-q1jn57cgufvtahui58t7k4kso8d2k6jg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIm_0Wg5zCWoMIERXbwAxWWTJ4V5UL5Yg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22825096518-q1jn57cgufvtahui58t7k4kso8d2k6jg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
