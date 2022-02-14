@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:au_chat/components/blob_button.dart';
+import 'package:au_chat/components/constants.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -57,17 +58,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               padding: const EdgeInsets.only(top: 60.0),
               child: BlobButton(
                 title: 'Login',
-                color: Color(0xFF3FC1C9),
+                color: blueColor,
                 onTap: () {
-                  print('tapped');
+                  Navigator.pushNamed(context, 'login-screen');
                 },
               ),
             ),
             BlobButton(
               title: 'Register',
-              color: Color(0xFFFC5185),
+              color: pinkColor,
               onTap: () {
-                print('tapped again');
+                Navigator.pushNamed(context, 'registration-screen');
               },
             ),
           ],
