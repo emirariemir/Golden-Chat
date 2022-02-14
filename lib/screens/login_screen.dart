@@ -26,58 +26,37 @@ class _LoginScreenState extends State<LoginScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: TextField(
+                keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {
                   print(value);
                 },
-                decoration: const InputDecoration(
-                  hintText: 'Enter your email here',
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.zero),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: blueColor, width: 1.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: blueColor, width: 3.0),
-                  ),
-                ),
+                decoration: kLoginDecoration.copyWith(
+                    hintText: 'Enter your mail here.'),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: TextField(
+                obscureText: true,
                 onChanged: (value) {
                   print(value);
                 },
-                decoration: const InputDecoration(
-                  hintText: 'Enter your email here',
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.zero),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: blueColor, width: 1.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: blueColor, width: 3.0),
-                  ),
+                decoration: kLoginDecoration.copyWith(
+                  hintText: 'Enter your password here',
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             ),
             BlobButton(
               title: 'Login',
-              color: blueColor,
+              color: kBlueColor,
               onTap: () {
                 print('somethn');
               },

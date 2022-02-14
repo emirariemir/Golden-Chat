@@ -58,7 +58,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               padding: const EdgeInsets.only(top: 60.0),
               child: BlobButton(
                 title: 'Login',
-                color: blueColor,
+                color: kBlueColor,
                 onTap: () {
                   Navigator.pushNamed(context, 'login-screen');
                 },
@@ -66,7 +66,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             BlobButton(
               title: 'Register',
-              color: pinkColor,
+              color: kPinkColor,
               onTap: () {
                 Navigator.pushNamed(context, 'registration-screen');
               },
