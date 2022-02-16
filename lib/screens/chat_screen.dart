@@ -41,7 +41,8 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
             onPressed: () {
               auth.signOut();
-              Navigator.pop(context);
+              Navigator.of(context)
+                  .popUntil(ModalRoute.withName('welcome-screen'));
             },
             icon: const Icon(Icons.clear),
           ),
