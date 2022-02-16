@@ -16,6 +16,7 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final auth = FirebaseAuth.instance;
+  late String message;
 
   @override
   void initState() {
@@ -68,14 +69,16 @@ class _ChatScreenState extends State<ChatScreen> {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: TextField(
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          message = value;
+                        },
                         decoration: kLoginDecoration.copyWith(
-                          enabledBorder: OutlineInputBorder(
+                          enabledBorder: const OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black),
                           ),
-                          focusedBorder: OutlineInputBorder(
+                          focusedBorder: const OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black),
                           ),
                         ),
@@ -83,7 +86,13 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      firestore.collection('messages').add({
+                        'sender': auth.currentUser?.email,
+                        'message': message,
+                        'time': FieldValue.serverTimestamp(),
+                      });
+                    },
                     icon: const Icon(Icons.arrow_upward_rounded),
                   ),
                 ],
@@ -102,7 +111,7 @@ class MessageStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: firestore.collection('users').snapshots(),
+      stream: firestore.collection('messages').orderBy('time').snapshots(),
       builder: (context, snapshots) {
         if (snapshots.hasData != true) {
           return const Center(
@@ -112,11 +121,12 @@ class MessageStream extends StatelessWidget {
             ),
           );
         }
-        final messages = snapshots.data!.docs;
+        final messages = snapshots.data!.docs.reversed;
         List<Text> messageList = [];
         for (var message in messages) {
-          final sender = message.get('username');
-          final text = Text(sender);
+          final sender = message.get('sender');
+          final dataMessage = message.get('message');
+          final text = Text('Sent from $sender the message is $dataMessage');
           messageList.add(text);
         }
         return Expanded(
