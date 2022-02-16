@@ -31,3 +31,9 @@ const InputDecoration kRegisterDecoration = InputDecoration(
     borderSide: BorderSide(color: kPinkColor, width: 3.0),
   ),
 );
+
+const kMessageContainerDecoration = BoxDecoration(
+  border: Border(
+    top: BorderSide(color: Colors.black, width: 2.0),
+  ),
+);
