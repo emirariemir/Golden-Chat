@@ -1,6 +1,6 @@
-# au_chat
+# Au Chat
 
-A chat application for Golden Community Members
+A chat application for Golden Community Members, also its so cool.
 
 ## Getting Started
 
