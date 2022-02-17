@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 // COLORS
 const Color kPinkColor = Color(0xFFFC5185);
+const Color kRedColor = Color(0xFFF95959);
 const Color kBlueColor = Color(0xFF3FC1C9);
+const Color kWeirdblackColor = Color(0xFF455D7A);
 
 const InputDecoration kLoginDecoration = InputDecoration(
   hintText: 'Enter your value here',

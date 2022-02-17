@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 final firestore = FirebaseFirestore.instance;
+final auth = FirebaseAuth.instance;
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -15,7 +16,6 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final auth = FirebaseAuth.instance;
   late String message;
 
   @override
@@ -61,7 +61,7 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            MessageStream(),
+            const MessageStream(),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
@@ -122,19 +122,80 @@ class MessageStream extends StatelessWidget {
           );
         }
         final messages = snapshots.data!.docs.reversed;
-        List<Text> messageList = [];
+        List<MessageBubble> messageList = [];
         for (var message in messages) {
-          final sender = message.get('sender');
-          final dataMessage = message.get('message');
-          final text = Text('Sent from $sender the message is $dataMessage');
-          messageList.add(text);
+          if (auth.currentUser!.email == message.get('sender')) {
+            final sender = message.get('sender');
+            final dataMessage = message.get('message');
+            final bubble = MessageBubble(sender, dataMessage, true);
+            messageList.add(bubble);
+          } else {
+            final sender = message.get('sender');
+            final dataMessage = message.get('message');
+            final bubble = MessageBubble(sender, dataMessage, false);
+            messageList.add(bubble);
+          }
         }
         return Expanded(
             child: ListView(
+          reverse: true,
           padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
           children: messageList,
         ));
       },
+    );
+  }
+}
+
+class MessageBubble extends StatelessWidget {
+  MessageBubble(this.sender, this.message, this.isMe);
+
+  final bool isMe;
+  final String sender;
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(11.0),
+      child: Column(
+        crossAxisAlignment:
+            isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Text(
+              sender,
+              style: const TextStyle(
+                fontSize: 15.0,
+                fontWeight: FontWeight.normal,
+                color: kWeirdblackColor,
+              ),
+            ),
+          ),
+          Material(
+            borderRadius: BorderRadius.only(
+              topLeft: isMe ? const Radius.circular(30.0) : Radius.zero,
+              topRight: isMe ? Radius.zero : const Radius.circular(30.0),
+              bottomRight: const Radius.circular(30.0),
+              bottomLeft: const Radius.circular(30.0),
+            ),
+            elevation: 0.0,
+            color: isMe ? kRedColor : Colors.black,
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+              child: Text(
+                message,
+                style: const TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
